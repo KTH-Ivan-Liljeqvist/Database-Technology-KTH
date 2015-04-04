@@ -69,8 +69,9 @@ ORDER BY name DESC;
 */
 
 SELECT DISTINCT ON (country) name,organization 
-FROM country INNER JOIN isMember ON country.code=isMember.country 
-			 INNER JOIN borders ON (country.code=borders.country1 OR country.code=borders.country2) 
+FROM country 
+INNER JOIN isMember ON country.code=isMember.country 
+INNER JOIN borders ON (country.code=borders.country1 OR country.code=borders.country2) 
 WHERE 
 country.code NOT IN (SELECT isMember.country FROM isMember WHERE organization='NATO' AND type='member') 
 AND ((borders.country1 IN (SELECT isMember.country FROM isMember WHERE organization='NATO' AND type='member') 
